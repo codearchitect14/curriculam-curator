@@ -1,0 +1,11 @@
+{
+  "persona_id": "time_constrained_designer",
+  "goal": "Master Figma auto-layout and variables to speed up design handoffs",
+  "time_budget_minutes": 60,
+  "user_context": {
+    "background": "Mid-level UI/UX designer, uses Figma daily",
+    "known": ["Figma basics", "Frames", "Components", "Basic prototyping"],
+    "unknown": ["Auto-layout advanced", "Figma variables", "Design tokens", "Component properties"],
+    "constraints": "60 minutes hard limit. Skip any basic Figma intro. Practical workflow content only."
+  }
+}

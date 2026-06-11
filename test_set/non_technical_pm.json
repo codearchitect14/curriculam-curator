@@ -1,0 +1,11 @@
+{
+  "persona_id": "non_technical_pm",
+  "goal": "Understand how large language models work well enough to evaluate vendor claims",
+  "time_budget_minutes": 90,
+  "user_context": {
+    "background": "Product manager, no coding background, business degree",
+    "known": ["What AI is generally", "Basic product management", "SaaS"],
+    "unknown": ["Transformers", "tokens", "embeddings", "fine-tuning", "RAG", "hallucination"],
+    "constraints": "No code. No math. Conceptual explanations only. Under 20 min videos preferred."
+  }
+}

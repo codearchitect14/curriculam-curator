@@ -1,0 +1,11 @@
+{
+  "persona_id": "advanced_llm_engineer",
+  "goal": "Build production-grade LLM evaluation pipelines and understand agent patterns",
+  "time_budget_minutes": 180,
+  "user_context": {
+    "background": "AI engineer, knows RAG, LangChain, fine-tuning, prompt engineering",
+    "known": ["RAG", "LangChain", "fine-tuning", "prompt engineering", "vector databases", "LLM APIs"],
+    "unknown": ["LLM evals frameworks", "LangGraph advanced patterns", "agent memory architectures", "structured outputs at scale"],
+    "constraints": "Skip any beginner LLM content, basic RAG intros, or LangChain 101. Advanced only."
+  }
+}

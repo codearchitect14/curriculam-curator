@@ -1,0 +1,11 @@
+{
+  "persona_id": "ml_beginner",
+  "goal": "Train and evaluate a simple image classifier",
+  "time_budget_minutes": 120,
+  "user_context": {
+    "background": "college student, knows Python basics",
+    "known": ["Python", "basic math", "for loops"],
+    "unknown": ["numpy", "pandas", "sklearn", "neural networks", "model evaluation"],
+    "constraints": "No math-heavy theory. I need to run code and see results."
+  }
+}

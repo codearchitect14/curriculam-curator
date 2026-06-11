@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Curriculum Curator — your AI learning guide. Personalized YouTube curricula built around your goals."
+    />
+    <title>Curriculum Curator — Your AI Learning Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              display: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                50: '#f5f3ff',
+                100: '#ede9fe',
+                500: '#8b5cf6',
+                600: '#7c3aed',
+                700: '#6d28d9',
+              },
+            },
+            boxShadow: {
+              card: '0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
+              elevated:
+                '0 8px 30px -4px rgb(0 0 0 / 0.08), 0 4px 12px -4px rgb(124 58 237 / 0.12)',
+              glow: '0 0 40px -8px rgb(124 58 237 / 0.45)',
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .font-display {
+        font-family: 'Plus Jakarta Sans', Inter, sans-serif;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in {
+        animation: fade-in 0.45s ease-out forwards;
+      }
+      @keyframes pulse-soft {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.45;
+        }
+      }
+      .animate-pulse-soft {
+        animation: pulse-soft 1.8s ease-in-out infinite;
+      }
+      @keyframes logo-pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.04);
+        }
+      }
+      .animate-logo-pulse {
+        animation: logo-pulse 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: -200% center;
+        }
+        100% {
+          background-position: 200% center;
+        }
+      }
+      .text-shimmer {
+        background: linear-gradient(
+          90deg,
+          #7c3aed 0%,
+          #14b8a6 40%,
+          #7c3aed 80%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 4s linear infinite;
+      }
+      .mesh-bg {
+        background-image:
+          radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.08) 0, transparent 50%),
+          radial-gradient(at 100% 0%, rgba(20, 184, 166, 0.06) 0, transparent 45%),
+          radial-gradient(at 80% 80%, rgba(99, 102, 241, 0.06) 0, transparent 40%);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 mesh-bg">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+

@@ -1,0 +1,11 @@
+{
+  "persona_id": "senior_dev_devops",
+  "goal": "Learn enough Kubernetes to deploy a multi-service app to a cluster",
+  "time_budget_minutes": 240,
+  "user_context": {
+    "background": "Senior software engineer, 8 years, strong Docker and Linux background",
+    "known": ["Docker", "Docker Compose", "Linux", "CI/CD", "Bash scripting", "Networking basics"],
+    "unknown": ["Kubernetes architecture", "kubectl", "Deployments", "Services", "Ingress", "Helm"],
+    "constraints": "Skip anything that starts from Docker basics. I want cluster-level content."
+  }
+}
