@@ -2,7 +2,7 @@
   "name": "curriculum-builder-ui",
   "version": "1.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "node api.js && vite",
     "build": "vite build"
   },
   "dependencies": {
