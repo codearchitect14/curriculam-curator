@@ -1,4 +1,3 @@
-.env
 .youtube_cache/
 venv/
 node_modules/
@@ -7,3 +6,4 @@ __pycache__/
 frontend/dist/
 eval_results/*
 !eval_results/.gitkeep
+config.bat
