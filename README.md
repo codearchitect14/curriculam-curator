@@ -4,7 +4,34 @@ A full-stack AI agent that builds personalized YouTube learning curricula from l
 
 ## Setup & Run
 
-### Backend
+### Docker (recommended)
+
+Prerequisites: [Docker Desktop](https://www.docker.com/products/docker-desktop/) (or Docker Engine + Compose v2).
+
+```bash
+cp .env.example .env
+# Fill in ANTHROPIC_API_KEY and YOUTUBE_API_KEY in .env
+
+docker compose up --build
+```
+
+- **Frontend (production static build):** [http://localhost:5173](http://localhost:5173) — React is compiled during the image build and served by Nginx.
+- **Backend API (direct access / debugging):** [http://localhost:8002](http://localhost:8002)
+
+The frontend container reverse-proxies `/api` to the backend, so the browser uses same-origin relative URLs. Nginx is configured for SSE streaming on `/api/curriculum/stream`.
+
+Useful commands:
+
+```bash
+docker compose up --build -d    # detached
+docker compose down             # stop and remove containers
+docker compose down -v          # also remove the youtube_cache volume
+docker compose logs -f backend  # tail backend logs
+```
+
+YouTube search cache is persisted in the `youtube_cache` Docker volume at `/app/.youtube_cache` inside the backend container.
+
+### Backend (local development)
 
 ```bash
 python -m venv venv
@@ -21,7 +48,7 @@ cd backend
 uvicorn api:app --reload --port 8002
 ```
 
-### Frontend
+### Frontend (local development)
 
 ```bash
 cd frontend
@@ -29,6 +56,18 @@ npm install
 npm run dev
 # Open http://localhost:5173
 ```
+
+For local dev with the backend in Docker, point the Vite proxy at the container:
+
+```bash
+# Windows PowerShell
+$env:VITE_API_PROXY_TARGET="http://localhost:8002"; npm run dev
+
+# macOS/Linux
+VITE_API_PROXY_TARGET=http://localhost:8002 npm run dev
+```
+
+Default proxy target when unset: `http://localhost:8002`.
 
 ### CLI
 

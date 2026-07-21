@@ -1,0 +1,33 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Version control
+.git
+.gitignore
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Node / frontend build artifacts
+frontend/node_modules/
+frontend/dist/
+
+# Runtime caches and generated output
+.youtube_cache/
+eval_results/*
+!eval_results/.gitkeep
+
+# IDE and OS
+.cursor/
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.DS_Store
