@@ -15,10 +15,15 @@ cp .env.example .env
 docker compose up --build
 ```
 
-- **Frontend (production static build):** [http://localhost:5173](http://localhost:5173) — React is compiled during the image build and served by Nginx.
-- **Backend API (direct access / debugging):** [http://localhost:8002](http://localhost:8002)
+- **App (UI + API):** [http://localhost:8417](http://localhost:8417)
 
-The frontend container reverse-proxies `/api` to the backend, so the browser uses same-origin relative URLs. Nginx is configured for SSE streaming on `/api/curriculum/stream`.
+A single container serves both. The React SPA is compiled during the image build and served directly by FastAPI as static files, so there is no separate web server. The browser uses same-origin relative `/api` URLs, and SSE streaming on `/api/curriculum/stream` works without a proxy in front.
+
+Override the published port with `APP_PORT`:
+
+```bash
+APP_PORT=9000 docker compose up --build   # UI + API on http://localhost:9000
+```
 
 Useful commands:
 
@@ -26,10 +31,10 @@ Useful commands:
 docker compose up --build -d    # detached
 docker compose down             # stop and remove containers
 docker compose down -v          # also remove the youtube_cache volume
-docker compose logs -f backend  # tail backend logs
+docker compose logs -f app      # tail logs
 ```
 
-YouTube search cache is persisted in the `youtube_cache` Docker volume at `/app/.youtube_cache` inside the backend container.
+YouTube search cache is persisted in the `youtube_cache` Docker volume at `/app/.youtube_cache` inside the container.
 
 ### Backend (local development)
 
@@ -45,8 +50,10 @@ cp .env.example .env
 # Fill in ANTHROPIC_API_KEY and YOUTUBE_API_KEY in .env
 
 cd backend
-uvicorn api:app --reload --port 8002
+uvicorn api:app --reload --port 8417
 ```
+
+If `frontend/dist` exists, this also serves the built UI at [http://localhost:8417](http://localhost:8417). Build it once with `cd frontend && npm run build`, or use the Vite dev server below for hot reload.
 
 ### Frontend (local development)
 
@@ -61,13 +68,13 @@ For local dev with the backend in Docker, point the Vite proxy at the container:
 
 ```bash
 # Windows PowerShell
-$env:VITE_API_PROXY_TARGET="http://localhost:8002"; npm run dev
+$env:VITE_API_PROXY_TARGET="http://localhost:8417"; npm run dev
 
 # macOS/Linux
-VITE_API_PROXY_TARGET=http://localhost:8002 npm run dev
+VITE_API_PROXY_TARGET=http://localhost:8417 npm run dev
 ```
 
-Default proxy target when unset: `http://localhost:8002`.
+Default proxy target when unset: `http://localhost:8417`.
 
 ### CLI
 

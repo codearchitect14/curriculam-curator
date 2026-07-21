@@ -9,12 +9,18 @@ from urllib.parse import unquote
 
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import ValidationError
 
 from agent import CurriculumAgent
 import config
-from config import CORS_ORIGINS, TEST_SET_DIR, validate_api_keys
+from config import (
+    CORS_ORIGINS,
+    FRONTEND_DIST_DIR,
+    TEST_SET_DIR,
+    validate_api_keys,
+)
 from youtube_client import YouTubeClient
 from curator import CurriculumCurator
 from evaluator import CurriculumEvaluator
@@ -250,3 +256,35 @@ async def get_test_personas() -> list[TestPersonaItem]:
             )
         )
     return items
+
+
+# Serve the built React SPA. Registered last so /api routes win.
+if FRONTEND_DIST_DIR.is_dir():
+    app.mount(
+        "/assets",
+        StaticFiles(directory=FRONTEND_DIST_DIR / "assets"),
+        name="assets",
+    )
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa(full_path: str) -> FileResponse:
+        """Serve a static file if it exists, else the SPA entry point."""
+        if full_path.startswith("api/"):
+            raise HTTPException(status_code=404, detail="Not found")
+
+        candidate = (FRONTEND_DIST_DIR / full_path).resolve()
+        if (
+            full_path
+            and candidate.is_file()
+            and candidate.is_relative_to(FRONTEND_DIST_DIR.resolve())
+        ):
+            return FileResponse(candidate)
+
+        return FileResponse(FRONTEND_DIST_DIR / "index.html")
+
+else:
+    logger.warning(
+        "Frontend build not found at %s; serving API only. "
+        "Run `npm run build` in frontend/ to enable the UI.",
+        FRONTEND_DIST_DIR,
+    )
