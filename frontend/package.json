@@ -2,8 +2,8 @@
   "name": "curriculum-builder-ui",
   "version": "1.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "dev": "node init && vite",
+    "build": "node init && vite build"
   },
   "dependencies": {
     "react": "^18.2.0",
