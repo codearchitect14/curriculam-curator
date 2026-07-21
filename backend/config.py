@@ -10,6 +10,9 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 TEST_SET_DIR = ROOT_DIR / "test_set"
 EVAL_RESULTS_DIR = ROOT_DIR / "eval_results"
 YOUTUBE_CACHE_DIR = ROOT_DIR / ".youtube_cache"
+FRONTEND_DIST_DIR = Path(
+    os.environ.get("FRONTEND_DIST_DIR", ROOT_DIR / "frontend" / "dist")
+)
 
 def _reload_env() -> None:
     """Load or refresh API keys from the repo-root .env file."""
